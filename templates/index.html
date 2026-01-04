@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render Test App</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-rocket"></i> Render Test Application</h1>
+            <p class="subtitle">A dummy Flask app for testing Render.com deployments</p>
+            <div class="status-badge">
+                <i class="fas fa-check-circle"></i> 
+                Status: {{ 'ACTIVE' if server_info.status != 'error' else 'ERROR' }}
+            </div>
+        </header>
+        
+        <div class="dashboard">
+            <!-- Server Info Card -->
+            <div class="card server-info">
+                <h2><i class="fas fa-server"></i> Server Information</h2>
+                <div id="serverInfo">
+                    <div class="server-info-item">
+                        <span class="label">Hostname:</span>
+                        <span class="value">{{ server_info.hostname }}</span>
+                    </div>
+                    <div class="server-info-item">
+                        <span class="label">Instance ID:</span>
+                        <span class="value">{{ server_info.instance_id }}</span>
+                    </div>
+                    <div class="server-info-item">
+                        <span class="label">Region:</span>
+                        <span class="value">{{ server_info.region }}</span>
+                    </div>
+                    <div class="server-info-item">
+                        <span class="label">Memory:</span>
+                        <span class="value">{{ server_info.memory }}</span>
+                    </div>
+                    <div class="server-info-item">
+                        <span class="label">Python Version:</span>
+                        <span class="value">{{ server_info.python_version }}</span>
+                    </div>
+                    <div class="server-info-item">
+                        <span class="label">Visits:</span>
+                        <span class="value">{{ server_info.visits }}</span>
+                    </div>
+                    <div class="server-info-item">
+                        <span class="label">Timestamp:</span>
+                        <span class="value">{{ server_info.timestamp }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Health Status Card -->
+            <div class="card api-test">
+                <h2><i class="fas fa-heartbeat"></i> Health Status</h2>
+                <div id="healthStatus">
+                    <div class="loading">
+                        <i class="fas fa-spinner"></i> Checking health...
+                    </div>
+                </div>
+                <div class="test-buttons">
+                    <button class="btn btn-primary" id="healthBtn">
+                        <i class="fas fa-redo"></i> Refresh Health
+                    </button>
+                    <button class="btn btn-secondary" id="serverInfoBtn">
+                        <i class="fas fa-info-circle"></i> Get Server Info
+                    </button>
+                    <button class="btn btn-success" id="generateDataBtn">
+                        <i class="fas fa-database"></i> Generate Data
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Message Box Card -->
+            <div class="card message-box">
+                <h2><i class="fas fa-comments"></i> Message Box</h2>
+                <div class="message-form">
+                    <textarea 
+                        id="messageInput" 
+                        class="message-input" 
+                        placeholder="Type a message to echo..."
+                        rows="3"></textarea>
+                    <button class="btn btn-primary" id="sendMessageBtn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                    <button class="btn btn-secondary" id="loadMessagesBtn">
+                        <i class="fas fa-sync"></i> Refresh Messages
+                    </button>
+                </div>
+                <h3>Recent Messages</h3>
+                <div class="messages-list" id="messagesList">
+                    <div class="loading">
+                        <i class="fas fa-spinner"></i> Loading messages...
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Calculator Card -->
+            <div class="card calculator">
+                <h2><i class="fas fa-calculator"></i> Calculator</h2>
+                <div class="calc-form">
+                    <input type="number" id="calcA" class="calc-input" placeholder="Number A" step="any">
+                    <select id="calcOp" class="calc-select">
+                        <option value="add">Add (+)</option>
+                        <option value="subtract">Subtract (-)</option>
+                        <option value="multiply">Multiply (×)</option>
+                        <option value="divide">Divide (÷)</option>
+                    </select>
+                    <input type="number" id="calcB" class="calc-input" placeholder="Number B" step="any">
+                    <button class="btn btn-success" id="calculateBtn">
+                        <i class="fas fa-equals"></i> Calculate
+                    </button>
+                </div>
+                <div id="calcResult">
+                    <!-- Result will appear here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- API Response Display -->
+        <div class="card">
+            <h2><i class="fas fa-code"></i> API Responses</h2>
+            <div class="response-area" id="apiResponse">
+                <div class="loading">
+                    <i class="fas fa-spinner"></i> Waiting for API calls...
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Render Test App • Built with Flask • Deployed on Render.com</p>
+            <p>
+                <i class="fas fa-code-branch"></i> 
+                <a href="https://github.com/yourusername/render-test-app" style="color: white; text-decoration: underline;">
+                    View on GitHub
+                </a>
+                • 
+                <i class="fas fa-book"></i> 
+                <a href="https://render.com/docs" style="color: white; text-decoration: underline;">
+                    Render Documentation
+                </a>
+            </p>
+        </footer>
+    </div>
+    
+    <script src="/static/script.js"></script>
+</body>
+</html>
